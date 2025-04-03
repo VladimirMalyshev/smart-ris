@@ -1,0 +1,27 @@
+services:
+  backend:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: backend-fastapi
+    ports:
+      - "8000:8000"
+    networks:
+      - app-network
+  
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: client-vue
+    depends_on:
+      - backend
+    ports:
+      - "5173:5173"
+    networks:
+      - app-network
+
+
+networks:
+  app-network:
+    driver: bridge
