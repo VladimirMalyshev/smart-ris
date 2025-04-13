@@ -1,16 +1,16 @@
 import { httpClient } from "../httpClient";
 
-export const get_users = async () => {
+export const getUsers = async () => {
 	const users = httpClient.get("/api/analytics/users");
 	return users;
 };
 
-export const get_documents = () => {
+export const getDocuments = () => {
 	const documents = httpClient.get("/api/analytics/documents");
 	return documents;
 };
 
-export const get_processing_time = () => {
-	const documents = httpClient.get("/api/analytics/processing-time");
-	return documents;
+export const getProcessingTime = () => {
+	const proccessingTime = httpClient.get("/api/analytics/processing-time");
+	return proccessingTime;
 };
