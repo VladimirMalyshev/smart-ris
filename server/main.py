@@ -31,9 +31,11 @@ def read_documents():
     ```json
     {
         "total": "30",
-        "draft": "10",
-        "on_signature": "5",
-        "signed": "15"
+        "statuses": {
+            "draft": "10",
+            "on_signature": "5",
+            "signed": "15"
+        }
     }
     ```
     """
