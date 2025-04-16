@@ -32,21 +32,21 @@ export const BarOptions = {
 		},
 	},
 };
+
 export const PieOptions = {
 	responsive: true,
 	maintainAspectRatio: false,
 	plugins: {
 		legend: {
-			display: false, // Легенду отключаем, если нужны подписи прямо на сегментах
+			display: false,
 		},
 		tooltip: {
-			enabled: true, // Включить всплывающие подсказки (опционально)
+			enabled: true,
 		},
-		// Добавляем плагин для подписей на сегментах
 		datalabels: {
-			color: "#ffffff", // Цвет текста
+			color: "#ffffff",
 			font: {
-				weight: "bold",
+				weight: "bold" as const, // Явно указываем тип
 				size: 14,
 			},
 			formatter: (value: number, context: Context): string => {
@@ -55,6 +55,5 @@ export const PieOptions = {
 			},
 		},
 	},
-	// Отключаем ВСЕ оси и сетки (они не нужны для круговой диаграммы)
 	scales: {},
 };
