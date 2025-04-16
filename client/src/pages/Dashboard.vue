@@ -15,7 +15,7 @@ import { onMounted, ref } from "vue";
 import { Bar, Line, Pie } from "vue-chartjs";
 import { getDocuments, getProcessingTime, getUsers } from "../api/analitics";
 import Card from "../components/Card.vue";
-import { BarOptions } from "../configs/charOptions";
+import { BarOptions, PieOptions } from "../configs/charOptions";
 
 ChartJS.register(
 	Title,
@@ -65,6 +65,7 @@ const data = ref({
 });
 
 const options = ref(BarOptions);
+const pieOptions = ref(PieOptions);
 </script>
 
 <template>
@@ -72,13 +73,10 @@ const options = ref(BarOptions);
 <div class="
   grid w-full h-full
   grid-cols-[max-content_1fr]
-  grid-rows-[min(500px,100%)_1fr]
   gap-4 p-[100px]
 ">    
     <Card title="Статистика документов">
-      <div class="bg-[#0c1008] p-2 w-full h-full rounded-xl">
-        <Pie :options :data/>
-      </div>
+        <Pie :pieOptions :data/>
     </Card>
 
 
@@ -88,7 +86,7 @@ const options = ref(BarOptions);
       </Card>
     </div>
 
-    <div class=" col-span-3">
+    <div class=" col-span-3 h-full w-full">
       <Card title="Среднее время обработки">
         <Line :options :data/>
 
