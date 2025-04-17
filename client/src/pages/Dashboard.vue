@@ -81,10 +81,10 @@ const lineOptions = ref(BarOptions);
   grid w-full h-full
   grid-cols-[minmax(250px,400px)_1fr]
 	  gap-4 box-border max-lg:flex max-lg:flex-col
-	p-10
+  grid-auto-rows-[minmax(300px,auto)]
+		p-10
 ">
-
-
+<div class=" w-full h-full">
     <Card title="Статистика документов">
       <template v-if="docsChartData">
         <Pie 
@@ -96,6 +96,7 @@ const lineOptions = ref(BarOptions);
         <div class="text-gray-500">Данные загружаются...</div>
 		   </template>
     </Card>
+		</div>
 
 
     <div class=" w-full h-full col-span-2">
