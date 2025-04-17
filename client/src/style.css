@@ -3,10 +3,3 @@
 @theme {
 	--color-background: #322454;
 }
-
-#app,
-body,
-html {
-	width: 100%;
-	height: 100%;
-}

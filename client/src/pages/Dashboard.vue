@@ -79,8 +79,9 @@ const lineOptions = ref(BarOptions);
 
 <div class="
   grid w-full h-full
-  grid-cols-[max-content_1fr]
-  gap-4 p-[100px]
+  grid-cols-[1fr_2fr]
+  gap-4 box-border max-lg:flex max-lg:flex-col
+	p-10
 ">
 
 
