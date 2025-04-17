@@ -54,6 +54,7 @@ export function usersTransformer(resp: UsersApiResponseType): ChartData<"bar"> {
 		datasets: [
 			{
 				data,
+				...DEFAULT_DATA,
 			},
 		],
 	};

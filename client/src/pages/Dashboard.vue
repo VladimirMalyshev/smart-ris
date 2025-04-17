@@ -93,7 +93,7 @@ const lineOptions = ref(BarOptions);
       </template>
       <template v-else>
         <div class="text-gray-500">Данные загружаются...</div>
-      </template>
+		   </template>
     </Card>
 
 
