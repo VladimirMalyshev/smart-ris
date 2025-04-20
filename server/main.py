@@ -65,7 +65,7 @@ def read_processing_time():
 app = FastAPI()
 
 origins = [
-    "http://81.177.139.211",
+    "http://[2001:1bb0:e000:1e::3e]",
     "http://localhost:5173",
     "http://localhost",
     "http://127.0.0.1:5173",
