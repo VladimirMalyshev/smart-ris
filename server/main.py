@@ -66,6 +66,7 @@ app = FastAPI()
 
 origins = [
     "http://[2001:1bb0:e000:1e::3e]",
+    "https://smart-ris.ru",
     "http://localhost:5173",
     "http://localhost",
     "http://127.0.0.1:5173",
