@@ -46,6 +46,7 @@ jobs:
         with:
           node-version: 22.x
           cache: npm
+          cache-dependency-path: client/package-lock.json
 
       - name: Восстановление кеша
         uses: actions/cache@v3
