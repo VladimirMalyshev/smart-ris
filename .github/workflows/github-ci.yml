@@ -1,0 +1,83 @@
+name: github CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  install:
+    name: Установка зависимостей
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: client
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.x
+          cache: npm
+
+      - name: Кеширование node_modules
+        uses: actions/cache@v3
+        with:
+          path: client/node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('client/package-lock.json') }}
+
+      - run: npm ci
+
+  build:
+    name: Сборка проекта
+    needs: install
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: client
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.x
+          cache: npm
+
+      - name: Восстановление кеша
+        uses: actions/cache@v3
+        with:
+          path: client/node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('client/package-lock.json') }}
+
+      - run: npm run build
+
+  deploy:
+    name: Деплой
+    if: ${{ github.event_name == 'push' }}
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Добавление SSH-ключа
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Добавление удалённого сервера в known_hosts
+        run: |
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          ssh-keyscan -p 49256 smart-ris.ru >> ~/.ssh/known_hosts
+
+      - name: Запуск деплоя
+        run: |
+          ssh -p 49256 deploy@smart-ris.ru '
+            cd /home/deploy/app
+            git pull origin main
+            docker compose -f docker-compose.prod.yml down
+            docker compose -f docker-compose.prod.yml up --build -d
+          '
